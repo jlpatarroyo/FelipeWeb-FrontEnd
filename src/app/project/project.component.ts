@@ -12,7 +12,7 @@ import * as moment from 'moment';
 export class ProjectComponent implements OnInit {
   constructor(private projectService: ProjectService) {}
 
-  projects: Observable<Project[]>;
+  projects: Project[];
 
   editing: Boolean;
 
@@ -41,13 +41,20 @@ export class ProjectComponent implements OnInit {
     };
     this.projectService.postProject(project)
     .subscribe(() => {
-      window.location.reload();
+      this.getProjects();
     })
   }
 
   ngOnInit(): void {
-    this.projects = this.projectService.getAllProjects();
+    this.getProjects();
     this.editing = false;
+  }
+
+  private getProjects(){
+    this.projectService.getAllProjects()
+    .subscribe(res => {
+      this.projects = res;
+    })
   }
 
   setEditing(p_editing: Boolean) {
@@ -73,9 +80,12 @@ export class ProjectComponent implements OnInit {
     return new Date().toISOString().split('T')[0];
   }
 
-  private validateValues(result:{}):Boolean{
-    var correct = true;
-    
-    return correct;
+  removeProject(index:number){
+    const project = this.projects[index];
+    this.projectService.deleteProject(project.name)
+    .subscribe(result => {
+      console.log("Deleting project: " + result);
+      this.projects.splice(index,1);
+    });
   }
 }

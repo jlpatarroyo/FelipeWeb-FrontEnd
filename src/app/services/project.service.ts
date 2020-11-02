@@ -28,4 +28,8 @@ export class ProjectService {
     postProject(project:{}):Observable<Project>{
         return this.http.post<Project>(this.base_url, project);
     }
+
+    deleteProject(name:String):Observable<Project>{
+        return this.http.delete<Project>(this.base_url + '/' + name);
+    }
 }

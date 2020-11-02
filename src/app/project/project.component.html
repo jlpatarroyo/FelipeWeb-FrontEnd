@@ -1,11 +1,14 @@
 <div class="project-container">
   <ul>
-    <li *ngFor="let project of projects | async; index as i">
+    <li *ngFor="let project of projects; index as i">
       <div>
         <a href="">{{ i + 1 }}. {{ project.name }}</a>
       </div>
       <div>{{ project.description }}</div>
       <div>{{ project.date }}</div>
+      <div>
+        <button (click)="removeProject(i)">Remove</button>
+      </div>
     </li>
   </ul>
 </div>
@@ -20,9 +23,7 @@
     </label>
     <label>
       Description:
-      <textarea id="descriptionInput" formControlName="description">
-
-      </textarea>
+      <textarea id="descriptionInput" formControlName="description"></textarea>
     </label>
     <label>
       Date:
