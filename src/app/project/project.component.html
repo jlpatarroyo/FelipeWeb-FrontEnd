@@ -1,0 +1,39 @@
+<div class="project-container">
+  <ul>
+    <li *ngFor="let project of projects | async; index as i">
+      <div>
+        <a href="">{{ i + 1 }}. {{ project.name }}</a>
+      </div>
+      <div>{{ project.description }}</div>
+      <div>{{ project.date }}</div>
+    </li>
+  </ul>
+</div>
+<div class="createButton" (click)="setEditing(true)" *ngIf="!editing">
+  <button id="createProject">Create Project</button>
+</div>
+<div class="project-form" *ngIf="editing">
+  <form [formGroup]="projectForm" (ngSubmit)="onSubmit()">
+    <label>
+      Name:
+      <input id="nameInput" formControlName="name" />
+    </label>
+    <label>
+      Description:
+      <textarea id="descriptionInput" formControlName="description">
+
+      </textarea>
+    </label>
+    <label>
+      Date:
+      <input
+        type="date"
+        formControlName="date"
+        (blur)="validateDate()"
+        [max]="getToday()"
+      />
+    </label>
+    <button type="submit" [disabled]="!projectForm.valid">Submit</button>
+    <button (click)="cancelEditing()">Cancel</button>
+  </form>
+</div>

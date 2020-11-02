@@ -7,20 +7,30 @@ import { AppComponent } from './app.component';
 import { NavigationBarComponent } from './navigation-bar/navigation-bar.component';
 import { HomeComponent } from './home/home.component';
 import { CategoryComponent } from './category/category.component';
+import { ProjectComponent } from './project/project.component';
+import { ProjectService } from './services/project.service';
+import { HttpClientModule } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavigationBarComponent,
     HomeComponent,
-    CategoryComponent
+    CategoryComponent,
+    ProjectComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    HttpClientModule,
+    CommonModule,
+    ReactiveFormsModule
   ],
-  providers: [],
+  providers: [ 
+    ProjectService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
