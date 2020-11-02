@@ -8,18 +8,19 @@
       <div>{{ project.date }}</div>
       <div>
         <button (click)="removeProject(i)">Remove</button>
+        <button (click)="setUpdating(i)">Edit</button>
       </div>
     </li>
   </ul>
 </div>
-<div class="createButton" (click)="setEditing(true)" *ngIf="!editing">
+<div class="createButton" (click)="setCreating(true)" *ngIf="!creating">
   <button id="createProject">Create Project</button>
 </div>
-<div class="project-form" *ngIf="editing">
-  <form [formGroup]="projectForm" (ngSubmit)="onSubmit()">
+<div class="project-form" *ngIf="creating || updating">
+  <form [formGroup]="projectForm" (ngSubmit)="onProjectSubmit()">
     <label>
       Name:
-      <input id="nameInput" formControlName="name" />
+      <input id="nameInput" formControlName="name"/>
     </label>
     <label>
       Description:
@@ -30,11 +31,10 @@
       <input
         type="date"
         formControlName="date"
-        (blur)="validateDate()"
         [max]="getToday()"
       />
     </label>
     <button type="submit" [disabled]="!projectForm.valid">Submit</button>
-    <button (click)="cancelEditing()">Cancel</button>
+    <button (click)="cancel()">Cancel</button>
   </form>
 </div>
