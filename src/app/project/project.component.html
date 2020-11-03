@@ -1,29 +1,29 @@
 <div class="project-container">
   <ul>
     <li *ngFor="let project of projects; index as i">
-      <div>
-        <a href="">{{ i + 1 }}. {{ project.name }}</a>
+      <div id="project-title">
+        <a href="">{{ project.name }}</a>
       </div>
-      <div>{{ project.description }}</div>
-      <div>{{ project.date }}</div>
+      <div id="project-description">{{ project.description }}</div>
+      <div id="project-date">Date: {{ project.date }}</div>
       <div>
-        <button [disabled]="isCreating || isUpdating" (click)="removeProject(i)">Remove</button>
         <button
-        [disabled]="isCreating || isUpdating"
+        id="edit-button"
+          [disabled]="isCreating || isUpdating"
           (click)="setUpdating(true); setEditingIndex(i); setCreating(false)"
         >
           Edit
         </button>
+        <button
+          id="remove-button"
+          [disabled]="isCreating || isUpdating"
+          (click)="removeProject(i)"
+        >
+          Remove
+        </button>
       </div>
     </li>
   </ul>
-</div>
-<div
-  class="createButton"
-  (click)="setCreating(true); setUpdating(false)"
-  
->
-  <button id="createProject" [disabled]="isCreating || isUpdating">Create Project</button>
 </div>
 <app-project-form
   *ngIf="isCreating || isUpdating"
@@ -34,3 +34,8 @@
   (updateProjects)="getProjects()"
 >
 </app-project-form>
+<div (click)="setCreating(true); setUpdating(false)">
+  <button id="create-button" *ngIf="!isCreating && !isUpdating">
+    Create Project
+  </button>
+</div>

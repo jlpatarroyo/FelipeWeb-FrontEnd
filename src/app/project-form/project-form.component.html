@@ -1,22 +1,39 @@
 <div class="project-form" *ngIf="isCreating || isUpdating">
-    <form [formGroup]="projectForm" (ngSubmit)="onProjectSubmit()">
+  <div class="form-title">
+    <p id="updating-title" *ngIf="isUpdating">
+      UPDATE '{{ projects[editingIndex].name }}'
+    </p>
+    <p id="creating-title" *ngIf="isCreating">CREATE PROJECT</p>
+  </div>
+  <form [formGroup]="projectForm" (ngSubmit)="onProjectSubmit()">
+    <div id="project-form-name-container">
       <label>
         Name:
-        <input id="nameInput" formControlName="name"/>
+        <input id="nameInput" formControlName="name" />
       </label>
+    </div>
+    <div id="project-form-description-container">
       <label>
         Description:
-        <textarea id="descriptionInput" formControlName="description"></textarea>
+        <div>
+          <textarea id="description-textarea"
+            id="descriptionInput"
+            formControlName="description"
+          ></textarea>
+        </div>
       </label>
+    </div>
+    <div id="project-form-date-container">
       <label>
         Date:
-        <input
-          type="date"
-          formControlName="date"
-          [max]="getToday()"
-        />
+        <input type="date" formControlName="date" [max]="getToday()" />
       </label>
-      <button type="submit" [disabled]="!projectForm.valid">Submit</button>
-      <button (click)="cancel()">Cancel</button>
-    </form>
-  </div>
+    </div>
+    <div id="project-form-buttons-container">
+      <button id="submit-button" type="submit" [disabled]="!projectForm.valid">
+        Submit
+      </button>
+      <button id="cancel-button" (click)="cancel()">Cancel</button>
+    </div>
+  </form>
+</div>

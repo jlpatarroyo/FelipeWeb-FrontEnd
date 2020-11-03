@@ -1,0 +1,50 @@
+.project-form {
+  background-color: lightgray;
+  color: black;
+  margin-bottom: 15px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  padding-left: 15px;
+}
+
+.project-form > form {
+    margin-left: 5px;
+}
+
+.form-title {
+  font-size: large;
+  font-weight: bolder;
+  margin-left: 5px;
+}
+
+#project-form-name-container{
+    margin-bottom: 5px;
+}
+
+#project-form-description-container{
+    margin-bottom: 5px;
+}
+
+#description-textarea{
+    width: 500px;
+    height: 200px;
+}
+
+#project-form-date-container{
+    margin-bottom: 5px;
+}
+
+#project-form-buttons-container{
+    margin-bottom: 5px;
+}
+
+#submit-button{
+    margin-right: 10px;
+    background-color: #C0F8D1;
+}
+
+#cancel-button{
+    margin-right: 10px;
+    background-color: #ED254E;
+    color: white;
+}
