@@ -40,11 +40,13 @@ export class ProjectComponent implements OnInit {
 
   removeProject(index: number) {
     const project = this.projects[index];
-    this.projectService.deleteProject(project.name).subscribe(() => {
-      this.getProjects();
-      this.setCreating(false);
-      this.setUpdating(false);
-    });
+    if(confirm("Are you sure you want to delete '" + project.name + "' project?")){
+      this.projectService.deleteProject(project.name).subscribe(() => {
+        this.getProjects();
+        this.setCreating(false);
+        this.setUpdating(false);
+      });
+    }
   }
 
   setUpdating(_isUpdating:Boolean) {
