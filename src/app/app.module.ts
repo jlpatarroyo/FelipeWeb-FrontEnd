@@ -12,6 +12,7 @@ import { ProjectService } from './services/project.service';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ProjectFormComponent } from './project-form/project-form.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     NavigationBarComponent,
     HomeComponent,
     CategoryComponent,
-    ProjectComponent
+    ProjectComponent,
+    ProjectFormComponent
   ],
   imports: [
     BrowserModule,

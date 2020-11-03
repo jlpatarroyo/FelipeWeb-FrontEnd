@@ -1,0 +1,22 @@
+<div class="project-form" *ngIf="isCreating || isUpdating">
+    <form [formGroup]="projectForm" (ngSubmit)="onProjectSubmit()">
+      <label>
+        Name:
+        <input id="nameInput" formControlName="name"/>
+      </label>
+      <label>
+        Description:
+        <textarea id="descriptionInput" formControlName="description"></textarea>
+      </label>
+      <label>
+        Date:
+        <input
+          type="date"
+          formControlName="date"
+          [max]="getToday()"
+        />
+      </label>
+      <button type="submit" [disabled]="!projectForm.valid">Submit</button>
+      <button (click)="cancel()">Cancel</button>
+    </form>
+  </div>
