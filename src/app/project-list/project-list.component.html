@@ -1,0 +1,50 @@
+<div class="row card-group">
+  <div class="col-3" *ngFor="let project of projects">
+    <div class="card project-card" style="width: 18rem">
+      <img
+        src="https://picsum.photos/200"
+        class="card-img-top"
+        style="max-width: 100%"
+      />
+      <div class="card-body">
+        <h5 class="card-title">{{ project.name }}</h5>
+        <p class="card-text">
+          {{
+            project.description.length > 50
+              ? (project.description | slice: 0:50) + ".."
+              : project.description
+          }}
+        </p>
+        <button href="#" class="btn btn-outline-primary">Edit</button>
+        <button href="#" class="btn btn-outline-danger">Delete</button>
+      </div>
+    </div>
+  </div>
+  <div class="col-3">
+    <div class="card" style="width: 18rem">
+      <div class="row h-100">
+        <div class="card-body text-center my-auto">
+          <button
+            class="btn btn-outline-dark"
+            routerLink="add-project"
+            routerLinkActive="active"
+          >
+            <svg
+              width="10em"
+              height="10em"
+              viewBox="0 0 16 16"
+              class="bi bi-plus"
+              fill="currentColor"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

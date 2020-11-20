@@ -3,7 +3,9 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { HomeComponent } from './home/home.component';
 import { CategoryComponent } from './category/category.component';
-import { ProjectComponent } from './project/project.component';
+import { ProjectListComponent } from './project-list/project-list.component';
+import { ProjectFormComponent } from './project-form/project-form.component';
+import { ProjectDetailComponent } from './project-detail/project-detail.component';
 
 const routes: Routes = [
   {
@@ -15,12 +17,20 @@ const routes: Routes = [
     component: HomeComponent
   },
   {
-    path:'category',
+    path:'categories',
     component: CategoryComponent
   },
   {
     path:'projects',
-    component: ProjectComponent
+    component: ProjectListComponent
+  },
+  {
+    path: 'projects/add-project',
+    component: ProjectFormComponent
+  },
+  {
+    path: 'projects/detail/:projectId',
+    component: ProjectDetailComponent
   }
 ];
 

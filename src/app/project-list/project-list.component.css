@@ -1,0 +1,11 @@
+button{
+    margin-right: 10px;
+}
+
+.card{
+    height: 100%;
+}
+
+.card-group>div{
+    margin-bottom: 20px;
+}

@@ -1,7 +1,3 @@
-.navbar{
-    background-color: #000;
-}
-
-.navbar > a{
-    color:white;
+nav{
+    margin-bottom: 20px;
 }

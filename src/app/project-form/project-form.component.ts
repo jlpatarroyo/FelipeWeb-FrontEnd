@@ -10,75 +10,29 @@ import { Project, ProjectService } from '../services/project.service';
 export class ProjectFormComponent implements OnInit {
   constructor(private projectService: ProjectService) {}
 
-  @Input() isUpdating: Boolean;
-  @Output() isUpdatingChange = new EventEmitter();
-
-  @Input() isCreating: Boolean;
-  @Output() isCreatingChange = new EventEmitter();
-
-  @Input() editingIndex: number;
-
-  @Input() projects: Project[];
-
-  @Output() updateProjects = new EventEmitter();
+  hasFinished:Boolean;
 
   projectForm = new FormGroup({
-    name: new FormControl('', [
+    name: new FormControl('',[
       Validators.required,
-      Validators.minLength(0),
-      Validators.maxLength(100),
+      Validators.minLength(1)
     ]),
-    description: new FormControl('', [
-      Validators.required,
-      Validators.minLength(1),
-      Validators.maxLength(5000),
+    description: new FormControl('',[
+      Validators.required
     ]),
-    date: new FormControl('', [Validators.required]),
+    startDate: new FormControl('',[
+      Validators.required
+    ]),
+    finishDate: new FormControl('')
   });
 
-  ngOnInit(): void {
-    if (this.isUpdating && this.editingIndex !== -1) {
-      const curr_project = this.projects[this.editingIndex];
-      const curr_date = new Date(curr_project.date);
-      this.projectForm.setValue({
-        name: curr_project.name,
-        description: curr_project.description,
-        date: curr_date.toISOString().split('T')[0],
-      });
-    }
-  }
-
-  onProjectSubmit() {
-    const result = this.projectForm.value;
-    const new_project = {
-      name: result.name,
-      description: result.description,
-      date: result.date,
-    };
-    if (this.isCreating) {
-      this.projectService.postProject(new_project).subscribe(() => {
-        this.updateProjects.emit(null);
-        this.cancel();
-      });
-    } else if (this.isUpdating) {
-      const curr_project = this.projects[this.editingIndex];
-      this.projectService
-        .updateProject(curr_project.name, new_project)
-        .subscribe(() => {
-          this.updateProjects.emit(null);
-          this.cancel();
-        });
-    }
-  }
-
-  cancel(): void {
-    this.isUpdating = false;
-    this.isUpdatingChange.emit(this.isUpdating);
-    this.isCreating = false;
-    this.isCreatingChange.emit(this.isCreating);
-  }
+  ngOnInit() {}
 
   getToday(): String {
     return new Date().toISOString().split('T')[0];
+  }
+
+  onSubmit(){
+    console.log(this.projectForm.value);
   }
 }
