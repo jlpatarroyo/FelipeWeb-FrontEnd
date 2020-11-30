@@ -1,1 +1,121 @@
-<p>category works!</p>
+<div class="row">
+  <div class="col-4">
+    <ul class="list-group">
+      <li
+        class="list-group-item"
+        *ngFor="let category of categories; index as i"
+        (click)="pickCategory(i)"
+        [ngClass]="{ active: currentIndex === i }"
+      >
+        {{ category.name }}
+      </li>
+      <li class="list-group-item add-category-item" (click)="clickCreate()">
+        <button
+          class="btn btn-outline-dark btn-block"
+          [disabled]="isEditing && currentCategory"
+        >
+          <svg
+            width="1em"
+            height="1em"
+            viewBox="0 0 16 16"
+            class="bi bi-plus"
+            fill="currentColor"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"
+            />
+          </svg>
+        </button>
+      </li>
+    </ul>
+  </div>
+  <div class="col-8">
+    <div class="card">
+      <div class="cat-info" *ngIf="!isEditing">
+        <div class="cat-title">
+          <strong
+            ><h3>{{ currentCategory.name }}</h3></strong
+          >
+        </div>
+        <div class="cat-description">
+          <p>{{ currentCategory.description }}</p>
+        </div>
+        <div class="cat-buttons">
+          <div class="row">
+            <div class="col-6">
+              <button
+                class="btn btn-block btn-outline-primary"
+                (click)="isEditing = !isEditing"
+              >
+                Edit
+              </button>
+            </div>
+            <div class="col-6">
+              <button
+                class="btn btn-block btn-outline-danger"
+                data-toggle="modal"
+                data-target="#deleteModal"
+              >
+                Delete
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <app-category-form
+        *ngIf="isEditing"
+        [currentCategory]="currentCategory"
+        (cancelSubmit)="
+          getCategories(); setDefaultCategory(); isEditing = !isEditing
+        "
+        (createRequest)="createCategory($event)"
+        (updateRequest)="updateCategory($event)"
+      ></app-category-form>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="deleteModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div id="delete-modal" class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Delete Category</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Are you sure you want to delete "{{ categories[currentIndex].name }}"
+        category?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+          Close
+        </button>
+        <button
+          type="button"
+          class="btn btn-danger"
+          (click)="deleteCategory()"
+          data-dismiss="modal"
+        >
+          Delete
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

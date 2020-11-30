@@ -22,5 +22,16 @@ export class CategoryService{
         return this.http.get<Category>(this.base_url + '/' + name);
     }
 
+    addCategory(category):Observable<Category>{
+        return this.http.post<Category>(this.base_url, category);
+    }
+
+    deleteCategory(name):Observable<Category>{
+        return this.http.delete<Category>(this.base_url + "/" + name);
+    }
+
+    updateCategory(name, category):Observable<Category>{
+        return this.http.put<Category>(this.base_url + `/${name}`, category);
+    }
     
 }

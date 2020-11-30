@@ -14,6 +14,8 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ProjectFormComponent } from './project-form/project-form.component';
 import { ProjectDetailComponent } from './project-detail/project-detail.component';
+import { CategoryService } from './services/category.service';
+import { CategoryFormComponent } from './category-form/category-form.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +26,7 @@ import { ProjectDetailComponent } from './project-detail/project-detail.componen
     ProjectListComponent,
     ProjectFormComponent,
     ProjectDetailComponent,
+    CategoryFormComponent,
   ],
   imports: [
     BrowserModule,
@@ -31,9 +34,9 @@ import { ProjectDetailComponent } from './project-detail/project-detail.componen
     FlexLayoutModule,
     HttpClientModule,
     CommonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
-  providers: [ProjectService],
+  providers: [ProjectService, CategoryService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

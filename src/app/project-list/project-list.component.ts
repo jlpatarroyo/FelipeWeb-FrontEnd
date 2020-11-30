@@ -17,7 +17,7 @@ export class ProjectListComponent implements OnInit {
 
   private getProjects() {
     this.projectService.getAllProjects().subscribe((res) => {
-      this.projects = res;
+      this.projects = res;   
     });
   }
 
